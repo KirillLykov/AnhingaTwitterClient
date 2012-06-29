@@ -1,0 +1,213 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:Anhinga.Controls;assembly=WpfCustomControlLibrary1"
+                    xmlns:con ="clr-namespace:Anhinga.Converters;assembly=WpfCustomControlLibrary1"
+                    xmlns:view="clr-namespace:Anhinga.View">
+
+    <con:DateToTextConverter x:Key="dateConverter"/>
+    
+    <DataTemplate x:Key="DMsgsItemTemplate">
+        <Grid x:Name="TTGrid"
+                  Height="70"
+                  Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="51*" />
+                <RowDefinition Height="19*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="28.5*" />
+                <ColumnDefinition Width="171.5*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Name="SenderAvatarImageBtn"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{DynamicResource EmptyButton}" 
+                    Command="{Binding DataContext.AvatarClickCommand,
+                        ElementName=AhingaViewInstance}"
+                    CommandParameter="{Binding Path=Sender}"
+                >
+                <Image Source="{Binding Path=Sender.ProfileImageUrl}"/>
+            </Button>
+
+            <Button Name="RecipientAvatarImageBtn"
+                    Height="22"
+                    VerticalAlignment="Bottom"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{DynamicResource EmptyButton}" 
+                    Command="{Binding DataContext.AvatarClickCommand,
+                        ElementName=AhingaViewInstance}"
+                    CommandParameter="{Binding Path=Recipient.Id}"
+                >
+                <Image Source="{Binding Path=Recipient.ProfileImageUrl}"/>
+            </Button>
+
+            <TextBlock Name="ScreenNameTextBlock" 
+                    Text="{Binding Path=Sender.ScreenName}"
+                    Grid.Row="1"
+                    Grid.Column="0"/>
+            <TextBlock Text="{Binding Path=CreatedDate,
+                    Converter={StaticResource dateConverter}}" 
+                   Height="19" Margin="0,0,0,0.5"
+                   VerticalAlignment="Bottom" 
+                   Grid.Column="1"
+                   Grid.Row="1"/>
+            <controls:TweetTextBlock
+                    TweetText="{Binding Path=Text}" 
+                    TextWrapping="Wrap"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2" />
+
+            <Button Name="SendMessage"
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    ToolTip="Send direct message"
+                    Style="{DynamicResource ActionButtonsStyle}"
+                    Command="{Binding DataContext.SendMsgClickCommand,
+                        RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                    CommandParameter="{Binding Path=SenderScreenName}"
+                    controls:EventFocusAttachment.ElementToFocus="{Binding ElementName=EnterDMTextBox}"
+                />
+
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TweetItemTemplate">
+        <Grid x:Name="TTGrid"
+                  Height="70"
+                  Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="51*" />
+                <RowDefinition Height="19*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*" />
+                <ColumnDefinition Width="28.5*" />
+                <ColumnDefinition Width="171.5*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Name="UserAvatarImageBtn"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{DynamicResource EmptyButton}" 
+                    Command="{Binding DataContext.AvatarClickCommand,
+                        RelativeSource={RelativeSource AncestorType={x:Type view:AnhingaView}, Mode=FindAncestor} }"
+                    CommandParameter="{Binding Path=User}"
+                >
+                <Image Source="{Binding Path=User.ProfileImageUrl}" 
+                        Name="UserAvatarImage" />
+            </Button>
+
+            <TextBlock Name="ScreenNameTextBlock" 
+                    Text="{Binding Path=User.ScreenName}"
+                    Grid.Row="1"
+                    Grid.Column="0"/>
+            <TextBlock Text="{Binding Path=CreatedDate,
+                    Converter={StaticResource dateConverter}}" 
+                   Height="19" Margin="0,0,0,0.5"
+                   VerticalAlignment="Bottom" 
+                   Grid.Column="1"
+                   Grid.Row="1"/>
+            <controls:TweetTextBlock
+                    TweetText="{Binding Path=Text}" 
+                    TextWrapping="Wrap"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2" />
+
+            <!-- Action buttons in the right corner -->
+            <StackPanel x:Name="ActionButtonsSP"
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    Style="{DynamicResource ActionButtonsSPStyle}">
+
+                <Button Name="Reply"
+                        ToolTip="Reply"
+                        Tag="{Binding Path=User.ScreenName}"
+                        Style="{DynamicResource ActionButtonsStyle}"
+                        Command="{Binding DataContext.ReplyClickCommand,
+                            RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                        CommandParameter="{Binding Path=Id}"
+                        controls:EventFocusAttachment.ElementToFocus="{Binding ElementName=EnterTweetTextBox}"
+                    />
+                <Button Name="Retweet"
+                        ToolTip="Retweet"
+                        Style="{DynamicResource ActionButtonsStyle}"
+                        Command="{Binding DataContext.RetweetClickCommand,
+                            RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                        CommandParameter="{Binding Path=Id}"
+                    />
+                <Button Name="SendMessage"
+                        ToolTip="Send direct message"
+                        Style="{DynamicResource ActionButtonsStyle}"
+                        Command="{Binding DataContext.SendMsgClickCommand,
+                            RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                        CommandParameter="{Binding Path=User.ScreenName}"
+                        controls:EventFocusAttachment.ElementToFocus="{Binding ElementName=EnterTweetTextBox}"
+                    />
+
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="UserItemDataTemplate">
+        <Grid Height="70"
+              Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55" />
+                <RowDefinition Height="15" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="55" />
+                <ColumnDefinition Width="195" />
+            </Grid.ColumnDefinitions>
+
+            <Button Name="UserAvatarImageBtn"
+                   Grid.RowSpan="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="1"
+                   Style="{DynamicResource EmptyButton}" 
+                   Command="{Binding DataContext.AvatarClickCommand,
+                                        ElementName=AhingaViewInstance}"
+                    CommandParameter="{Binding .}">
+                <Image Grid.Row="0" Source="{Binding Path=ProfileImageUrl}" />
+            </Button>
+
+            <TextBlock Grid.Row="0"
+                       Grid.RowSpan="1"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="1"
+                       Name="BioTextBlock"
+                       TextWrapping="Wrap"
+                       Text="{Binding Path=Description}"/>
+            <TextBlock Grid.Row="1" 
+                       Grid.ColumnSpan="2"
+                       Name="ScreenNameTextBlock" 
+                       Text="{Binding Path=ScreenName}"
+                           Margin="0,0,118,0" 
+                           Width="132" />
+            <ToggleButton Grid.Column="1"
+                    Grid.RowSpan="2"
+                    Margin="0,38,0,0"
+                    Name="FollowingStatusButton"
+                    Style="{DynamicResource GlassToggleButton}"
+                    Command="{Binding DataContext.FollowUnfollowCommand,
+                        RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                    CommandParameter="{Binding .}"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="RefreshableTabItemTemplate">
+        <DockPanel HorizontalAlignment="Right"
+                VerticalAlignment="Top">
+            <DockPanel.ContextMenu>
+                <ContextMenu x:Name="refreshContextMenu">
+                    <MenuItem Header="Refresh" Command="{Binding Path=RefreshCommand}"/>
+                </ContextMenu>
+            </DockPanel.ContextMenu>
+            <ContentPresenter HorizontalAlignment="Left" Content="{Binding Path=Name}" />
+        </DockPanel>
+    </DataTemplate>
+
+</ResourceDictionary>

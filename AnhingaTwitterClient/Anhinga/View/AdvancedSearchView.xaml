@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="Anhinga.View.AdvancedSearchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:view ="clr-namespace:Anhinga.View"
+             xmlns:con ="clr-namespace:Anhinga.Converters;assembly=AnhingaCommon"
+             mc:Ignorable="d"
+             d:DesignHeight="800" d:DesignWidth="340">
+    <UserControl.Resources>
+        <con:DoublesToGeoLocationConverter x:Key="geoConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <!--<Canvas Panel.ZIndex="99" Grid.Row="0">-->
+
+            <Expander Header="Search parameters" Name="WordsExpander">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <!-- 0 -->
+                <Label Content="Any of these words" Height="28" Name="labelAny"
+                       Grid.Row="0" Grid.Column="0"/>
+                <TextBox Height="23" Name="AnyTextBox"
+                         Grid.Row="0" Grid.Column="1"
+                         Text="{Binding SearchParams.AnyWords}"/>
+                <!-- 1 -->
+                <Label Content="None of these words" Height="28" Name="labelWithout"
+                       Grid.Row="1" Grid.Column="0"/>
+                <TextBox Height="23" Name="WithoutTextBox"
+                         Grid.Row="1" Grid.Column="1"
+                         Text="{Binding SearchParams.WithoutWords}"/>
+                <!-- 2 -->
+                <Label Content="Tag" Height="28" Name="labelTag"
+                       Grid.Row="2" Grid.Column="0"/>
+                <TextBox Height="23" Name="TagTextBox"
+                         Grid.Row="2" Grid.Column="1"
+                         Text="{Binding SearchParams.Tag}"/>
+                <!-- 3 -->
+                <Label Content="Location" Height="28" Name="labelLocation"
+                       Grid.Row="3" Grid.Column="0"/>
+                <TextBox Height="23" Name="LocationTextBox"
+                         Grid.Row="3" Grid.Column="1"
+                         Text="{Binding SearchParams.GeoLocation,
+                         Converter={StaticResource geoConverter}}"/>
+                <!-- 4 -->
+                <Label Content="Distance" Height="28" Name="labelDist"
+                       Grid.Row="4" Grid.Column="0"/>
+                <TextBox Height="23" Name="DistanceTextBox"
+                         Grid.Row="4" Grid.Column="1"
+                         Text="{Binding SearchParams.Distance}"/>
+                <!-- 5 -->
+                <Button Height="20" Content="Search" Grid.Row="5" Grid.ColumnSpan="2" Command="{Binding SearchCommand}"/>
+            </Grid>
+            </Expander>
+        <!--</Canvas>-->
+
+        <ListBox x:Name="TweetList"
+             Grid.Row="1"
+             Style="{DynamicResource MainListBoxStyle}"
+             ItemsSource="{Binding Path=Tweets}"
+             IsSynchronizedWithCurrentItem="True"
+             ItemTemplate="{DynamicResource TweetItemTemplate}"/>
+
+    </Grid>
+</UserControl>

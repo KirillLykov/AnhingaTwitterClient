@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B292AD21-00B0-4EB6-8B6B-F53FEA7CB016}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Anhinga</RootNamespace>
+    <AssemblyName>Anhinga</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\net35\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\net35\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="TweetSharp">
+      <HintPath>..\..\thirdparty\TweetSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="TweetSharp.Twitter">
+      <HintPath>..\..\thirdparty\TweetSharp.Twitter.dll</HintPath>
+      <Private>False</Private>
+      <Aliases>global</Aliases>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Model\AskPinFromUserDialog.xaml.cs">
+      <DependentUpon>AskPinFromUserDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\OAuthHandler.cs" />
+    <Compile Include="Model\Utilities.cs" />
+    <Compile Include="ViewModel\AdvancedSearchViewModel.cs" />
+    <Compile Include="ViewModel\DirectMsgsViewModel.cs" />
+    <Compile Include="ViewModel\FollowersViewModel.cs" />
+    <Compile Include="ViewModel\FollowingsViewModel.cs" />
+    <Compile Include="ViewModel\RetweetsViewModel.cs" />
+    <Compile Include="ViewModel\SearchUsersViewModel.cs" />
+    <Compile Include="ViewModel\UsersBaseViewModel.cs" />
+    <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\PageBase.cs" />
+    <Compile Include="ViewModel\RepliesViewModel.cs" />
+    <Compile Include="ViewModel\AnhingaMainViewModel.cs" />
+    <Compile Include="ViewModel\TweetsBaseViewModel.cs" />
+    <Compile Include="ViewModel\SearchTweetsViewModel.cs" />
+    <Compile Include="View\AdvancedSearchView.xaml.cs">
+      <DependentUpon>AdvancedSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AnhingaView.xaml.cs">
+      <DependentUpon>AnhingaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DirectMsgsView.xaml.cs">
+      <DependentUpon>DirectMsgsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SearchTweetsView.xaml.cs">
+      <DependentUpon>SearchTweetsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TweetsView.xaml.cs">
+      <DependentUpon>TweetsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Model\AskPinFromUserDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AdvancedSearchView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AnhingaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DirectMsgsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SearchTweetsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TweetsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AnhingaSkins\AnhingaTwitterClientSkins.csproj">
+      <Project>{B84D7DFB-8F99-4731-AFF1-0B932475E842}</Project>
+      <Name>AnhingaTwitterClientSkins</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\AnhingaTwitterClientCommon.csproj">
+      <Project>{AAE23855-7C8D-45A8-9443-0EB95CA68882}</Project>
+      <Name>AnhingaTwitterClientCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

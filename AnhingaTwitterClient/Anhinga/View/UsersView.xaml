@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Anhinga.View.UsersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="340">
+    <UserControl.Resources>
+        
+        <DataTemplate x:Key="UserItemDataTemplate">
+            <Grid Style="{DynamicResource GridForListsStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55*" />
+                    <RowDefinition Height="15*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="55*" />
+                    <ColumnDefinition Width="195*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Name="UserAvatarImageBtn"
+                   Grid.RowSpan="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="1"
+                   Style="{DynamicResource EmptyButton}" 
+                   Command="{Binding DataContext.AvatarClickCommand,
+                                        ElementName=AhingaViewInstance}"
+                    CommandParameter="{Binding .}">
+                    <Image Grid.Row="0" Source="{Binding Path=ProfileImageUrl}" />
+                </Button>
+
+                <TextBlock Grid.Row="0"
+                       Grid.RowSpan="1"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="1"
+                       Name="BioTextBlock"
+                       TextWrapping="Wrap"
+                       Text="{Binding Path=Description}"/>
+                <TextBlock Grid.Row="1" 
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Left"  
+                       Name="ScreenNameTextBlock" 
+                       Text="{Binding Path=ScreenName}"/>
+                <ToggleButton Grid.Column="1"
+                    Grid.RowSpan="2"
+                    Name="FollowingStatusButton"
+                    Style="{DynamicResource GlassToggleButton}"
+                    Command="{Binding DataContext.FollowUnfollowCommand,
+                        RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                    CommandParameter="{Binding .}" HorizontalAlignment="Right" />
+            </Grid>
+        </DataTemplate>
+        
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Expander Header="User search" Name="UserSearchExpander">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox Name="UserSearchTextBlock"
+                    Grid.Column="0"
+                    Grid.Row="0"/>
+                <Button Name="UserSearchButton"
+                    Content="Search"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Command="{Binding SearchUserCommand}"
+                    CommandParameter="{Binding .,
+                        ElementName=UserSearchTextBlock}"/>
+
+            </Grid>
+        </Expander>
+
+        <ListBox x:Name="UsersList"
+             ItemsSource="{Binding Path=Users, NotifyOnSourceUpdated=True}"
+             IsSynchronizedWithCurrentItem="True"
+             ItemTemplate="{DynamicResource UserItemDataTemplate}"
+             Grid.Column="0"
+             Grid.ColumnSpan="2"
+             Grid.Row="1"/>
+        
+    </Grid>
+</UserControl>

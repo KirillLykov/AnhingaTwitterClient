@@ -1,0 +1,10 @@
+﻿<Window x:Class="Anhinga.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:view="clr-namespace:Anhinga.View"
+        Title="Anhinga standalone"
+	Height="830"
+ 	Width="360" 
+	WindowStyle="ToolWindow">
+    <view:AnhingaView />
+</Window>
