@@ -3,6 +3,6 @@ Several years ago I wrote an article about MVVM design pattern in WPF
 Then I continued developing WPF TwitterClient based on MVVM and wrote Anhinga.
 
 As you know twitter api use AOuth autorisation protocol. Thus in order to use Anhinga
-you have to register had to resigter your own twitter application 
+you have to register your own twitter application 
 on the Twitter portal. After that you will obtain so-called ConsumerKey and ConsumerSecret.
 You need to enter them in AnhingaTwitterClient properties.
