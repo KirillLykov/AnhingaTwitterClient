@@ -6,3 +6,12 @@ As you know twitter api use AOuth autorisation protocol. Thus in order to use An
 you have to register your own twitter application 
 on the Twitter portal. After that you will obtain so-called ConsumerKey and ConsumerSecret.
 You need to enter them in AnhingaTwitterClient properties.
+
+It has several dependencies: hammock, newtonsoft.json, tweetsharp.twitter, tweetsharp.
+Put the following files in the folder "thirdparty" next to AnhingaTwitterClient folder:
+Hammock.dll
+Newtonsoft.Json.dll
+TweetSharp.Twitter.dll
+TweetSharp.Twitter.xml
+TweetSharp.dll	
+TweetSharp.xml
